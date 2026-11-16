@@ -82,14 +82,14 @@ This implementation plan breaks down the Nocturneum gothic productivity applicat
     - Implement completion effect animation using SVG filters
     - _Requirements: 1.1, 1.3_
 
-  - [ ] 3.5 Implement CandleTimer main component
+  - [x] 3.5 Implement CandleTimer main component
     - Create `src/components/timer/CandleTimer.tsx` with state management
     - Use setInterval with drift compensation for timer accuracy
     - Integrate with useLocalStorage hook for persistence
     - Connect judge mode hook for time acceleration
     - _Requirements: 1.2, 1.4, 1.7, 1.8_
 
-  - [ ] 3.6 Create TimerControls subcomponent
+  - [x] 3.6 Create TimerControls subcomponent
     - Implement `src/components/timer/TimerControls.tsx` with start/pause/reset buttons
     - Add duration selector dropdown (1-120 minutes)
     - Apply gothic button styling
@@ -107,7 +107,7 @@ This implementation plan breaks down the Nocturneum gothic productivity applicat
     - Test completion effect triggers at zero
     - _Requirements: 1.1, 1.3, 1.5, 1.6_
 
-- [ ] 4. Checkpoint - Verify timer module
+- [x] 4. Checkpoint - Verify timer module
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 5. Implement Soundscape Engine module
@@ -128,7 +128,7 @@ This implementation plan breaks down the Nocturneum gothic productivity applicat
     - **Validates: Requirements 2.10**
     - Test that enable → disable → enable restores identical audio characteristics
 
-  - [ ] 5.4 Implement SoundscapeEngine main component
+  - [x] 5.4 Implement SoundscapeEngine main component
     - Create `src/components/soundscape/SoundscapeEngine.tsx` with AudioContext management
     - Initialize audio context on user interaction
     - Manage audio node lifecycle (connect/disconnect from destination)
@@ -167,7 +167,7 @@ This implementation plan breaks down the Nocturneum gothic productivity applicat
     - Return matched pattern with explanation or fallback message
     - _Requirements: 3.6, 3.7, 3.14_
 
-  - [ ]* 7.3 Write property test for pattern matching determinism
+  - [x] 7.3 Write property test for pattern matching determinism
     - **Property 6: Pattern Matching Determinism**
     - **Validates: Requirements 3.3, 3.4, 3.5, 3.13**
     - Test that analyzing same error multiple times produces identical results
@@ -179,17 +179,17 @@ This implementation plan breaks down the Nocturneum gothic productivity applicat
     - Add fallback to localStorage if IndexedDB unavailable
     - _Requirements: 3.10, 8.3, 8.7_
 
-  - [ ]* 7.5 Write property test for bestiary log entry structure
+  - [x] 7.5 Write property test for bestiary log entry structure
     - **Property 7: Bestiary Log Entry Structure**
     - **Validates: Requirements 3.9**
     - Test that all entries contain required fields with correct types
 
-  - [ ]* 7.6 Write property test for bestiary log sorting and limiting
+  - [x] 7.6 Write property test for bestiary log sorting and limiting
     - **Property 8: Bestiary Log Sorting and Limiting**
     - **Validates: Requirements 3.11**
     - Test that retrieving N entries returns min(N, 50) sorted by timestamp descending
 
-  - [ ] 7.7 Create AlchemyCircle animation component
+  - [x] 7.7 Create AlchemyCircle animation component
     - Implement `src/components/altar/AlchemyCircle.tsx` with rotating SVG graphic
     - Use Framer Motion for continuous rotation during analysis
     - _Requirements: 3.2_
@@ -224,7 +224,7 @@ This implementation plan breaks down the Nocturneum gothic productivity applicat
     - Add memoization to avoid re-parsing
     - _Requirements: 4.3, 4.4_
 
-  - [ ]* 9.2 Write property test for markdown parsing consistency
+  - [x] 9.2 Write property test for markdown parsing consistency
     - **Property 9: Markdown Parsing Consistency**
     - **Validates: Requirements 4.3, 4.4**
     - Test that parsing produces consistent HTML structure for markdown syntax
@@ -235,7 +235,7 @@ This implementation plan breaks down the Nocturneum gothic productivity applicat
     - Render markdown content on both front and back faces
     - _Requirements: 4.1, 4.2, 4.13_
 
-  - [ ]* 9.4 Write property test for card flip round-trip
+  - [x] 9.4 Write property test for card flip round-trip
     - **Property 11: Card Flip Round-Trip**
     - **Validates: Requirements 4.12**
     - Test that two consecutive flips return to original state
@@ -246,7 +246,7 @@ This implementation plan breaks down the Nocturneum gothic productivity applicat
     - Implement card position tracking
     - _Requirements: 4.9, 4.15_
 
-  - [ ]* 9.6 Write property test for card navigation bounds
+  - [x] 9.6 Write property test for card navigation bounds
     - **Property 10: Card Navigation Bounds**
     - **Validates: Requirements 4.9**
     - Test that navigation always keeps index in valid range [0, N-1]
@@ -295,12 +295,12 @@ This implementation plan breaks down the Nocturneum gothic productivity applicat
     - Render markdown tables with proper formatting
     - _Requirements: 5.6, 5.7, 5.8_
 
-  - [ ]* 11.3 Write property test for code syntax highlighting preservation
+  - [x] 11.3 Write property test for code syntax highlighting preservation
     - **Property 12: Code Syntax Highlighting Preservation**
     - **Validates: Requirements 5.7**
     - Test that highlighting adds markup without altering code text content
 
-  - [ ] 11.4 Implement AlchemistBlueprintModal main component
+  - [x] 11.4 Implement AlchemistBlueprintModal main component
     - Create `src/components/blueprint/AlchemistBlueprintModal.tsx` with modal overlay
     - Use Framer Motion for modal entrance/exit animations
     - Add backdrop blur effect

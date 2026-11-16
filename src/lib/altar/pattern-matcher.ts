@@ -19,6 +19,9 @@ export const FALLBACK_NO_MATCH_MESSAGE =
 /**
  * Execute synchronous sequential pattern matching against all 45 loaded patterns.
  * Returns the first matching pattern or null if no match is found.
+ *
+ * @param errorText - Raw error or stack trace text to match
+ * @returns The matching pattern definition or null
  */
 export function matchErrorPatternSync(errorText: string): LoadedPattern | null {
   if (!errorText || !errorText.trim()) {
@@ -41,6 +44,10 @@ export function matchErrorPatternSync(errorText: string): LoadedPattern | null {
 /**
  * Analyze an error string with a guaranteed timeout limit (default 200ms).
  * Validates Requirements 3.6, 3.7, 3.14
+ *
+ * @param errorText - Raw error or stack trace text to analyze
+ * @param options - Configuration options such as custom timeoutMs
+ * @returns Promise resolving to an AnalysisResult with matched pattern or fallback
  */
 export async function analyzeError(
   errorText: string,

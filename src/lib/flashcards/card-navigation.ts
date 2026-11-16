@@ -9,6 +9,10 @@
  * For any deck with N cards and current index I:
  *   next = (I + 1) % N
  * Validates Requirement 4.9
+ *
+ * @param currentIndex - The zero-based index of the currently active card
+ * @param totalCards - The total number of cards in the deck
+ * @returns The wrapped next zero-based card index
  */
 export function getNextCardIndex(currentIndex: number, totalCards: number): number {
   if (totalCards <= 0) return 0;
@@ -20,6 +24,10 @@ export function getNextCardIndex(currentIndex: number, totalCards: number): numb
  * For any deck with N cards and current index I:
  *   prev = (I - 1 + N) % N
  * Validates Requirement 4.9
+ *
+ * @param currentIndex - The zero-based index of the currently active card
+ * @param totalCards - The total number of cards in the deck
+ * @returns The wrapped previous zero-based card index
  */
 export function getPrevCardIndex(currentIndex: number, totalCards: number): number {
   if (totalCards <= 0) return 0;
@@ -29,6 +37,10 @@ export function getPrevCardIndex(currentIndex: number, totalCards: number): numb
 /**
  * Format position indicator string (e.g. "3 / 10").
  * Validates Requirement 4.11
+ *
+ * @param currentIndex - The zero-based card index
+ * @param totalCards - The total number of cards in the deck
+ * @returns Formatted position string
  */
 export function formatCardPosition(currentIndex: number, totalCards: number): string {
   if (totalCards <= 0) return '0 / 0';
@@ -45,6 +57,10 @@ export interface NavigationCallbacks {
 /**
  * Handle keyboard navigation events (ArrowLeft, ArrowRight, Spacebar).
  * Validates Requirement 4.15
+ *
+ * @param event - Keyboard event to process
+ * @param callbacks - Actions to execute upon matching keys
+ * @returns True if a navigation key was handled and default was prevented
  */
 export function handleCardKeyboardEvent(
   event: KeyboardEvent | React.KeyboardEvent,

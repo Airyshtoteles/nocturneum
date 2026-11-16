@@ -12,6 +12,9 @@ import { SoundEffectId } from '@/types';
  * Property 4: Volume-to-Gain Mapping
  * For any volume V in [0, 100]: gain G = V / 100.
  * Validates Requirement 2.7
+ *
+ * @param volume - Volume percentage between 0 and 100
+ * @returns Linear Web Audio API gain value between 0.0 and 1.0
  */
 export function volumeToGain(volume: number): number {
   const clamped = Math.min(100, Math.max(0, volume));
@@ -20,6 +23,9 @@ export function volumeToGain(volume: number): number {
 
 /**
  * Convert gain (0-1) back to volume (0-100).
+ *
+ * @param gain - Linear Web Audio gain between 0.0 and 1.0
+ * @returns Volume percentage between 0 and 100
  */
 export function gainToVolume(gain: number): number {
   const clamped = Math.min(1, Math.max(0, gain));
@@ -28,8 +34,12 @@ export function gainToVolume(gain: number): number {
 
 /**
  * Generate a white noise AudioBuffer for rain and thunder effects.
- * Creates 2 seconds of random samples at given sample rate.
+ * Creates random samples at given audio context sample rate.
  * Validates Requirement 2.1 (Rain), 2.3 (Thunder)
+ *
+ * @param audioContext - Target Web Audio context
+ * @param durationSeconds - Length of noise buffer in seconds (default 2)
+ * @returns Synthesized white noise AudioBuffer
  */
 export function createWhiteNoiseBuffer(
   audioContext: AudioContext,
@@ -50,6 +60,9 @@ export function createWhiteNoiseBuffer(
 /**
  * Create a rain effect: white noise → lowpass filter (1200Hz) → gain node.
  * Validates Requirement 2.1
+ *
+ * @param audioContext - Target Web Audio context
+ * @returns Connected audio nodes for rain synthesis
  */
 export function createRainEffect(audioContext: AudioContext): {
   source: AudioBufferSourceNode;
@@ -79,6 +92,9 @@ export function createRainEffect(audioContext: AudioContext): {
 /**
  * Create a clock tick effect: sine oscillator burst (800Hz, 10ms attack, 50ms decay).
  * Validates Requirement 2.2
+ *
+ * @param audioContext - Target Web Audio context
+ * @returns Connected oscillator and gain nodes for clock ticks
  */
 export function createTickEffect(audioContext: AudioContext): {
   oscillator: OscillatorNode;
@@ -98,6 +114,10 @@ export function createTickEffect(audioContext: AudioContext): {
 
 /**
  * Schedule a single tick envelope: 10ms attack, 50ms decay.
+ *
+ * @param gain - Gain node to envelope
+ * @param time - AudioContext start time
+ * @param volume - Target peak volume (0-100)
  */
 export function scheduleTickEnvelope(gain: GainNode, time: number, volume: number): void {
   const g = volumeToGain(volume);
@@ -110,6 +130,9 @@ export function scheduleTickEnvelope(gain: GainNode, time: number, volume: numbe
 /**
  * Create a thunder effect: noise → amplitude modulation (LFO) → exponential decay → gain.
  * Validates Requirement 2.3
+ *
+ * @param audioContext - Target Web Audio context
+ * @returns Connected audio nodes for thunder synthesis
  */
 export function createThunderEffect(audioContext: AudioContext): {
   source: AudioBufferSourceNode;
@@ -131,6 +154,11 @@ export function createThunderEffect(audioContext: AudioContext): {
 
 /**
  * Schedule a thunder rumble with LFO amplitude modulation and exponential decay.
+ *
+ * @param gain - Gain node to envelope
+ * @param time - AudioContext start time
+ * @param volume - Target peak volume (0-100)
+ * @param durationSeconds - Length of rumble in seconds (default 2.0)
  */
 export function scheduleThunderRumble(
   gain: GainNode,
@@ -147,6 +175,9 @@ export function scheduleThunderRumble(
 /**
  * Create a card flip effect: triangle oscillator → frequency sweep (400Hz → 200Hz over 150ms).
  * Validates Requirement 2.4
+ *
+ * @param audioContext - Target Web Audio context
+ * @returns Connected oscillator and gain node for flip effect
  */
 export function createFlipEffect(audioContext: AudioContext): {
   oscillator: OscillatorNode;
@@ -166,6 +197,11 @@ export function createFlipEffect(audioContext: AudioContext): {
 
 /**
  * Schedule a card flip envelope: frequency sweep with short decay.
+ *
+ * @param oscillator - Oscillator node whose frequency will be swept
+ * @param gain - Gain node to envelope
+ * @param time - AudioContext start time
+ * @param volume - Target peak volume (0-100)
  */
 export function scheduleFlipEnvelope(
   oscillator: OscillatorNode,
@@ -183,6 +219,9 @@ export function scheduleFlipEnvelope(
 
 /**
  * Get a display label for a sound effect ID.
+ *
+ * @param id - SoundEffectId identifier
+ * @returns Human-readable label with emoji
  */
 export function getEffectLabel(id: SoundEffectId): string {
   const labels: Record<SoundEffectId, string> = {

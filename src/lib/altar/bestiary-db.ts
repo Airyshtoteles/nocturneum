@@ -21,6 +21,9 @@ export const BESTIARY_DB_NAME = 'nocturneum_db';
 /**
  * Add or update an entry in the Bestiary log.
  * Validates Requirement 3.10
+ *
+ * @param entry - Bestiary log entry to save
+ * @returns Promise that resolves once saved
  */
 export async function saveBestiaryEntry(entry: BestiaryEntry): Promise<void> {
   return addBestiaryEntry(entry);
@@ -30,6 +33,9 @@ export async function saveBestiaryEntry(entry: BestiaryEntry): Promise<void> {
  * Retrieve the most recent entries, sorted descending by timestamp.
  * Defaults to 50 entries per Requirement 3.11.
  * Validates Requirements 3.11, 8.3
+ *
+ * @param limit - Maximum number of entries to return (default 50)
+ * @returns Promise resolving to an array of Bestiary entries
  */
 export async function loadBestiaryEntries(limit: number = 50): Promise<BestiaryEntry[]> {
   return getBestiaryEntries(limit);
@@ -38,6 +44,9 @@ export async function loadBestiaryEntries(limit: number = 50): Promise<BestiaryE
 /**
  * Search Bestiary entries by query string (matches errorText, language, or pattern).
  * Validates Requirement 8.3
+ *
+ * @param query - Keyword to search within error message, language, or pattern ID
+ * @returns Promise resolving to filtered Bestiary entries
  */
 export async function searchBestiary(query: string): Promise<BestiaryEntry[]> {
   return searchBestiaryEntries(query);
@@ -45,6 +54,9 @@ export async function searchBestiary(query: string): Promise<BestiaryEntry[]> {
 
 /**
  * Delete a specific entry by its UUID.
+ *
+ * @param id - Unique identifier of the entry to remove
+ * @returns Promise that resolves once deleted
  */
 export async function removeBestiaryEntry(id: string): Promise<void> {
   return deleteBestiaryEntry(id);
@@ -52,6 +64,8 @@ export async function removeBestiaryEntry(id: string): Promise<void> {
 
 /**
  * Clear all Bestiary entries.
+ *
+ * @returns Promise that resolves once all entries are cleared
  */
 export async function purgeBestiary(): Promise<void> {
   return clearBestiary();
@@ -60,6 +74,8 @@ export async function purgeBestiary(): Promise<void> {
 /**
  * Check if the current environment is running with native IndexedDB or fallback mode.
  * Validates Requirement 8.7
+ *
+ * @returns Storage mode status indicator
  */
 export function checkBestiaryStorageMode(): { isIndexedDB: boolean; fallbackActive: boolean } {
   const isAvailable = isIndexedDBAvailable();
