@@ -1,0 +1,547 @@
+{
+  "version": 1,
+  "patterns": {
+    "javascript": [
+      {
+        "id": "js-undefined-property",
+        "regex": "Cannot read propert(?:y|ies) (?:of undefined|of null|'(\\w+)' of (?:undefined|null))",
+        "explanation": "You are trying to access a property on a value that is undefined or null. This often happens when an object hasn't been initialized or a function returned undefined.",
+        "solutions": [
+          "Add a null check before accessing the property: if (obj != null) { obj.prop }",
+          "Use optional chaining: obj?.prop",
+          "Ensure the variable is properly initialized before use",
+          "Check if an API call returned the expected data structure"
+        ],
+        "relatedDocs": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining"]
+      },
+      {
+        "id": "js-not-a-function",
+        "regex": "(\\w+) is not a function",
+        "explanation": "You are trying to call something as a function, but it is not callable. This may mean the variable holds a different type than expected, or the method name is misspelled.",
+        "solutions": [
+          "Check the spelling of the function name",
+          "Verify the import/require statement is correct",
+          "Ensure the object has the expected method",
+          "Check if you accidentally overwrote the function variable"
+        ],
+        "relatedDocs": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Not_a_function"]
+      },
+      {
+        "id": "js-unexpected-token",
+        "regex": "(?:Unexpected token|Unexpected end of input|Unexpected identifier)",
+        "explanation": "There is a syntax error in your JavaScript code. The parser encountered a character or end-of-file that it didn't expect.",
+        "solutions": [
+          "Check for missing or extra brackets, parentheses, or braces",
+          "Look for missing commas in object literals or arrays",
+          "Ensure strings are properly closed with matching quotes",
+          "Check for typos in keywords (e.g., 'funtion' instead of 'function')"
+        ],
+        "relatedDocs": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Unexpected_token"]
+      },
+      {
+        "id": "js-reference-not-defined",
+        "regex": "ReferenceError: (\\w+) is not defined",
+        "explanation": "The variable or function you're trying to use hasn't been declared in the current scope.",
+        "solutions": [
+          "Check the spelling of the variable name",
+          "Ensure the variable is declared with let, const, or var before use",
+          "Verify the import statement if using modules",
+          "Check if the variable is in scope (not inside another function or block)"
+        ],
+        "relatedDocs": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Not_defined"]
+      },
+      {
+        "id": "js-syntax-error",
+        "regex": "SyntaxError: (?:Unexpected end of input|Invalid or unexpected token|Missing initializer)",
+        "explanation": "The JavaScript parser found a syntax error. This typically means the code structure is malformed.",
+        "solutions": [
+          "Check for unclosed string literals or template literals",
+          "Ensure all brackets and parentheses are properly matched",
+          "Look for missing semicolons where required",
+          "Validate JSON strings if parsing JSON data"
+        ],
+        "relatedDocs": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError"]
+      },
+      {
+        "id": "js-type-error-assignment",
+        "regex": "TypeError: Assignment to constant variable",
+        "explanation": "You tried to reassign a variable declared with const. Constants cannot be changed after initialization.",
+        "solutions": [
+          "Use let instead of const if the variable needs to be reassigned",
+          "For objects/arrays declared with const, you can still modify their properties/elements",
+          "Create a new variable instead of reassigning"
+        ],
+        "relatedDocs": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const"]
+      },
+      {
+        "id": "js-range-error",
+        "regex": "RangeError: (?:Maximum call stack size exceeded|Invalid array length|Invalid count value)",
+        "explanation": "A value exceeded its allowed range. For stack overflow, this usually means infinite recursion.",
+        "solutions": [
+          "Check for infinite recursion in your functions",
+          "Add a proper base case to recursive functions",
+          "Consider converting recursion to iteration for deep structures",
+          "Check array lengths and numeric values are within valid bounds"
+        ],
+        "relatedDocs": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Too_much_recursion"]
+      },
+      {
+        "id": "js-uri-error",
+        "regex": "URIError: URI malformed",
+        "explanation": "A URI encoding or decoding function received an invalid argument.",
+        "solutions": [
+          "Ensure the string passed to decodeURIComponent is properly encoded",
+          "Use encodeURIComponent before decoding",
+          "Check for unescaped special characters in the URI"
+        ],
+        "relatedDocs": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError"]
+      },
+      {
+        "id": "js-json-parse",
+        "regex": "(?:JSON\\.parse|JSON\\.stringify|Unexpected token .* in JSON|is not valid JSON)",
+        "explanation": "There's an error parsing or stringifying JSON data. The input string may not be valid JSON.",
+        "solutions": [
+          "Validate the JSON string with a JSON validator",
+          "Check for trailing commas in JSON (they're not allowed)",
+          "Ensure property names are double-quoted",
+          "Check if the data source returned HTML or plain text instead of JSON"
+        ],
+        "relatedDocs": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse"]
+      },
+      {
+        "id": "js-promise-rejection",
+        "regex": "(?:Unhandled promise rejection|UnhandledPromiseRejection|unhandledrejection)",
+        "explanation": "A Promise was rejected but there was no .catch() handler or try/catch block to handle the error.",
+        "solutions": [
+          "Add a .catch() handler to your Promise chain",
+          "Wrap async/await calls in try/catch blocks",
+          "Add a global unhandledrejection event listener for debugging",
+          "Check the error that caused the rejection and fix the root cause"
+        ],
+        "relatedDocs": ["https://developer.mozilla.org/en-US/docs/Web/API/Window/unhandledrejection_event"]
+      },
+      {
+        "id": "js-import-error",
+        "regex": "(?:Cannot find module|Module not found|Failed to resolve import)",
+        "explanation": "The module or file you're trying to import cannot be found at the specified path.",
+        "solutions": [
+          "Check the file path and ensure the module exists",
+          "Verify the package is installed in node_modules (run npm install)",
+          "Check for case sensitivity issues in the file path",
+          "Ensure the file extension is correct or configure module resolution"
+        ],
+        "relatedDocs": ["https://nodejs.org/api/modules.html"]
+      },
+      {
+        "id": "js-eval-error",
+        "regex": "EvalError:",
+        "explanation": "An error occurred related to the eval() function, though modern engines rarely throw this.",
+        "solutions": [
+          "Avoid using eval() in your code",
+          "Use safer alternatives like JSON.parse for data parsing",
+          "Consider using Function() constructor if dynamic code execution is needed"
+        ],
+        "relatedDocs": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError"]
+      },
+      {
+        "id": "js-iterator-error",
+        "regex": "(?:is not iterable|not a function or its return value is not iterable)",
+        "explanation": "You tried to iterate over a value that doesn't implement the iterable protocol (e.g., using for...of on a non-iterable).",
+        "solutions": [
+          "Ensure the value is an array, string, Map, Set, or other iterable",
+          "Check if the variable is null or undefined before iterating",
+          "Use Object.entries() or Object.keys() to iterate over plain objects",
+          "Implement the Symbol.iterator protocol for custom objects"
+        ],
+        "relatedDocs": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols"]
+      },
+      {
+        "id": "js-strict-mode",
+        "regex": "(?:in strict mode|'use strict'|Cannot delete|Cannot assign to read only property)",
+        "explanation": "Strict mode is enforced and caught an otherwise-silent error. This helps identify potential bugs early.",
+        "solutions": [
+          "Review the specific restriction that's being violated",
+          "Declare variables properly with let/const/var",
+          "Avoid deleting variables, functions, or function arguments",
+          "Don't assign to read-only properties"
+        ],
+        "relatedDocs": ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode"]
+      },
+      {
+        "id": "js-cross-origin",
+        "regex": "(?:CORS|cross-origin|Access-Control-Allow-Origin|blocked by CORS policy)",
+        "explanation": "The browser blocked a cross-origin request because the server didn't include the proper CORS headers.",
+        "solutions": [
+          "Configure the server to send proper Access-Control-Allow-Origin headers",
+          "Use a proxy server during development",
+          "Check if the request method and headers are allowed by the server",
+          "For development, consider using a CORS browser extension"
+        ],
+        "relatedDocs": ["https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS"]
+      }
+    ],
+    "typescript": [
+      {
+        "id": "ts-property-not-exist",
+        "regex": "Property '(\\w+)' does not exist on type '([^']+)'",
+        "explanation": "TypeScript cannot find the specified property on the given type. The property may be misspelled or the type definition is incomplete.",
+        "solutions": [
+          "Check the spelling of the property name",
+          "Verify the type definition includes this property",
+          "Use type assertion if you're sure the property exists: (obj as ExtendedType).prop",
+          "Add the missing property to the interface or type"
+        ],
+        "relatedDocs": ["https://www.typescriptlang.org/docs/handbook/2/objects.html"]
+      },
+      {
+        "id": "ts-type-not-assignable",
+        "regex": "Type '([^']+)' is not assignable to type '([^']+)'",
+        "explanation": "The value you're trying to assign doesn't match the expected type. TypeScript's type system is preventing a potential runtime error.",
+        "solutions": [
+          "Check if the value type matches the expected type",
+          "Add proper type conversion or parsing",
+          "Use union types if multiple types are valid",
+          "Update the type definition if it's too restrictive"
+        ],
+        "relatedDocs": ["https://www.typescriptlang.org/docs/handbook/2/types-from-types.html"]
+      },
+      {
+        "id": "ts-cannot-find-name",
+        "regex": "Cannot find name '(\\w+)'",
+        "explanation": "TypeScript cannot find the identifier in scope. It may be undeclared, not imported, or the type definitions are missing.",
+        "solutions": [
+          "Import the identifier from its module",
+          "Install type definitions: npm install --save-dev @types/packagename",
+          "Declare the identifier in a .d.ts file",
+          "Check the spelling and casing of the identifier"
+        ],
+        "relatedDocs": ["https://www.typescriptlang.org/docs/handbook/modules.html"]
+      },
+      {
+        "id": "ts-argument-not-assignable",
+        "regex": "Argument of type '([^']+)' is not assignable to parameter of type '([^']+)'",
+        "explanation": "The argument you're passing to a function doesn't match the parameter's expected type.",
+        "solutions": [
+          "Check the function's parameter types and adjust the argument",
+          "Use type assertion if the types are compatible at runtime",
+          "Convert the value to the expected type before passing",
+          "Update the function signature if it should accept more types"
+        ],
+        "relatedDocs": ["https://www.typescriptlang.org/docs/handbook/2/functions.html"]
+      },
+      {
+        "id": "ts-object-possibly-null",
+        "regex": "Object is possibly '(?:null|undefined)'",
+        "explanation": "TypeScript detects that a value could be null or undefined at this point, and you're trying to use it without a null check.",
+        "solutions": [
+          "Add a null/undefined check before accessing the value",
+          "Use optional chaining: obj?.property",
+          "Use the non-null assertion operator if certain: obj!.property",
+          "Use nullish coalescing for defaults: value ?? defaultValue"
+        ],
+        "relatedDocs": ["https://www.typescriptlang.org/docs/handbook/2/narrowing.html"]
+      },
+      {
+        "id": "ts-no-overload-matches",
+        "regex": "No overload matches this call",
+        "explanation": "None of the function's overloaded signatures match the provided arguments.",
+        "solutions": [
+          "Review the function's overload signatures",
+          "Check argument types and count",
+          "Use explicit type annotations on the arguments",
+          "Ensure you're calling the right overload variant"
+        ],
+        "relatedDocs": ["https://www.typescriptlang.org/docs/handbook/2/functions.html#function-overloads"]
+      },
+      {
+        "id": "ts-generic-constraint",
+        "regex": "Type '([^']+)' does not satisfy the constraint '([^']+)'",
+        "explanation": "A generic type parameter doesn't meet the constraint imposed by the extends clause.",
+        "solutions": [
+          "Ensure the type argument satisfies all properties of the constraint",
+          "Add the missing properties to your type",
+          "Widen the constraint if it's too restrictive",
+          "Use a different type that satisfies the constraint"
+        ],
+        "relatedDocs": ["https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-constraints"]
+      },
+      {
+        "id": "ts-missing-return",
+        "regex": "(?:Not all code paths return a value|Function lacks ending return statement)",
+        "explanation": "The function has code paths that don't return a value, but the return type expects one.",
+        "solutions": [
+          "Add a return statement to all code paths",
+          "Add a default return at the end of the function",
+          "Check if all switch/if branches return values",
+          "Update the return type to include undefined if that's valid"
+        ],
+        "relatedDocs": ["https://www.typescriptlang.org/docs/handbook/2/functions.html"]
+      },
+      {
+        "id": "ts-cannot-find-module",
+        "regex": "Cannot find module '([^']+)'",
+        "explanation": "TypeScript cannot resolve the module at the specified path. The module may be missing or the path configuration is wrong.",
+        "solutions": [
+          "Install the package: npm install packagename",
+          "Install type definitions: npm install --save-dev @types/packagename",
+          "Check tsconfig.json paths configuration",
+          "Create a declaration file if the module doesn't have types"
+        ],
+        "relatedDocs": ["https://www.typescriptlang.org/docs/handbook/modules/reference.html"]
+      },
+      {
+        "id": "ts-implicit-any",
+        "regex": "(?:has an 'any' type|implicitly has an 'any' type|Parameter .* implicitly has an 'any' type)",
+        "explanation": "TypeScript couldn't infer the type and defaulted to 'any'. With strict mode, this produces an error.",
+        "solutions": [
+          "Add an explicit type annotation to the variable or parameter",
+          "Enable type inference by providing an initial value",
+          "Use generics to propagate types through function calls",
+          "Suppress with // @ts-ignore only as a last resort"
+        ],
+        "relatedDocs": ["https://www.typescriptlang.org/tsconfig#noImplicitAny"]
+      },
+      {
+        "id": "ts-readonly-assignment",
+        "regex": "Cannot assign to '(\\w+)' because it is a read-only property",
+        "explanation": "You're trying to modify a property marked as readonly in its type definition.",
+        "solutions": [
+          "Create a new object with the updated property instead of mutating",
+          "Use the spread operator: { ...obj, prop: newValue }",
+          "Remove the readonly modifier if mutation is intended",
+          "Use Partial<T> or a mutable version of the type"
+        ],
+        "relatedDocs": ["https://www.typescriptlang.org/docs/handbook/2/objects.html#readonly-properties"]
+      },
+      {
+        "id": "ts-missing-property",
+        "regex": "Property '(\\w+)' is missing in type '([^']+)' but required in type '([^']+)'",
+        "explanation": "An object is missing a required property defined in the target type.",
+        "solutions": [
+          "Add the missing property to the object",
+          "Make the property optional with ? if it's not always needed",
+          "Use Partial<T> if all properties should be optional",
+          "Check if you're using the correct type"
+        ],
+        "relatedDocs": ["https://www.typescriptlang.org/docs/handbook/2/objects.html"]
+      },
+      {
+        "id": "ts-tuple-length",
+        "regex": "(?:Tuple type|Source has \\d+ element|Target requires \\d+ element)",
+        "explanation": "The tuple has a different number of elements than expected by the type.",
+        "solutions": [
+          "Ensure the array has the exact number of elements required",
+          "Use rest elements in tuple types if variable length is needed",
+          "Check if you should use an array type instead of a tuple"
+        ],
+        "relatedDocs": ["https://www.typescriptlang.org/docs/handbook/2/objects.html#tuple-types"]
+      },
+      {
+        "id": "ts-union-narrowing",
+        "regex": "(?:This expression is not callable|Each member of the union type.*has signatures)",
+        "explanation": "TypeScript can't determine which member of a union type to use. You need to narrow the type first.",
+        "solutions": [
+          "Use type guards (typeof, instanceof) to narrow the union",
+          "Use discriminated unions with a common literal property",
+          "Use the 'in' operator to check for specific properties",
+          "Store the value in a variable with proper type narrowing"
+        ],
+        "relatedDocs": ["https://www.typescriptlang.org/docs/handbook/2/narrowing.html"]
+      },
+      {
+        "id": "ts-enum-error",
+        "regex": "(?:Enum member must have initializer|enum declaration|Computed values are not permitted in an enum)",
+        "explanation": "There's an error in an enum declaration. Enum members may need explicit values.",
+        "solutions": [
+          "Initialize string enum members with string values",
+          "Use const assertions instead of enums: as const",
+          "Ensure computed values are not used in enums",
+          "Consider using union types as an alternative to enums"
+        ],
+        "relatedDocs": ["https://www.typescriptlang.org/docs/handbook/enums.html"]
+      }
+    ],
+    "python": [
+      {
+        "id": "py-name-not-defined",
+        "regex": "NameError: name '(\\w+)' is not defined",
+        "explanation": "You're referencing a variable or function name that hasn't been defined in the current scope.",
+        "solutions": [
+          "Check the spelling of the variable name",
+          "Ensure the variable is defined before it's used",
+          "Import the module or function if it's from another file",
+          "Check indentation to ensure the variable is in scope"
+        ],
+        "relatedDocs": ["https://docs.python.org/3/library/exceptions.html#NameError"]
+      },
+      {
+        "id": "py-type-error-args",
+        "regex": "TypeError: (\\w+)\\(\\) (?:missing \\d+ required positional argument|takes \\d+ positional argument|got an unexpected keyword argument)",
+        "explanation": "A function was called with the wrong number or type of arguments.",
+        "solutions": [
+          "Check the function signature for required parameters",
+          "Ensure you're passing the correct number of arguments",
+          "Use keyword arguments for clarity",
+          "Check if you need to pass self/cls for instance/class methods"
+        ],
+        "relatedDocs": ["https://docs.python.org/3/library/exceptions.html#TypeError"]
+      },
+      {
+        "id": "py-indentation-error",
+        "regex": "IndentationError: (?:unexpected indent|expected an indented block|unindent does not match)",
+        "explanation": "Python's indentation rules have been violated. Python uses indentation to define code blocks.",
+        "solutions": [
+          "Use consistent indentation (4 spaces per level recommended)",
+          "Don't mix tabs and spaces",
+          "Ensure all blocks after colons have indented content",
+          "Check for invisible characters or wrong whitespace"
+        ],
+        "relatedDocs": ["https://docs.python.org/3/faq/programming.html#why-am-i-getting-an-indentationerror"]
+      },
+      {
+        "id": "py-key-error",
+        "regex": "KeyError: '?(\\w+)'?",
+        "explanation": "You tried to access a dictionary key that doesn't exist.",
+        "solutions": [
+          "Use dict.get(key, default) for safe access with a fallback",
+          "Check if the key exists with 'if key in dict'",
+          "Use try/except KeyError for error handling",
+          "Print the dictionary keys to see what's available"
+        ],
+        "relatedDocs": ["https://docs.python.org/3/library/exceptions.html#KeyError"]
+      },
+      {
+        "id": "py-attribute-error",
+        "regex": "AttributeError: '(\\w+)' object has no attribute '(\\w+)'",
+        "explanation": "The object doesn't have the attribute or method you're trying to access.",
+        "solutions": [
+          "Check the spelling of the attribute name",
+          "Use dir(obj) to list available attributes",
+          "Verify the object is the correct type",
+          "Check if the attribute exists with hasattr(obj, 'attr')"
+        ],
+        "relatedDocs": ["https://docs.python.org/3/library/exceptions.html#AttributeError"]
+      },
+      {
+        "id": "py-import-error",
+        "regex": "(?:ImportError|ModuleNotFoundError): (?:No module named|cannot import name) '?(\\w+)'?",
+        "explanation": "Python can't find or import the specified module or name.",
+        "solutions": [
+          "Install the package: pip install packagename",
+          "Check the module name spelling",
+          "Ensure the module is in the Python path",
+          "Check for circular imports"
+        ],
+        "relatedDocs": ["https://docs.python.org/3/library/exceptions.html#ImportError"]
+      },
+      {
+        "id": "py-value-error",
+        "regex": "ValueError: (?:invalid literal|could not convert|not enough values to unpack|too many values to unpack)",
+        "explanation": "A function received an argument of the right type but inappropriate value.",
+        "solutions": [
+          "Validate input before passing to functions",
+          "Check the format of string data being converted",
+          "Ensure unpacking matches the number of values",
+          "Use try/except ValueError for user input handling"
+        ],
+        "relatedDocs": ["https://docs.python.org/3/library/exceptions.html#ValueError"]
+      },
+      {
+        "id": "py-index-error",
+        "regex": "IndexError: (?:list index out of range|tuple index out of range|string index out of range)",
+        "explanation": "You tried to access an index that is beyond the bounds of the sequence.",
+        "solutions": [
+          "Check the length of the sequence before accessing by index",
+          "Use negative indexing for accessing from the end: list[-1]",
+          "Use try/except IndexError for safe access",
+          "Consider using slice syntax which doesn't raise on out-of-bounds"
+        ],
+        "relatedDocs": ["https://docs.python.org/3/library/exceptions.html#IndexError"]
+      },
+      {
+        "id": "py-type-error-operation",
+        "regex": "TypeError: unsupported operand type\\(s\\) for .+: '(\\w+)' and '(\\w+)'",
+        "explanation": "An operation was performed between incompatible types (e.g., adding a string and integer).",
+        "solutions": [
+          "Convert values to the same type before the operation",
+          "Use str() for string conversion, int() for integer conversion",
+          "Check the types of variables with type(variable)",
+          "Implement __add__, __mul__, etc. for custom classes"
+        ],
+        "relatedDocs": ["https://docs.python.org/3/library/exceptions.html#TypeError"]
+      },
+      {
+        "id": "py-file-not-found",
+        "regex": "FileNotFoundError: \\[Errno 2\\] No such file or directory",
+        "explanation": "The file or directory path you specified doesn't exist.",
+        "solutions": [
+          "Check the file path spelling and case sensitivity",
+          "Use os.path.exists() to verify the path before accessing",
+          "Use absolute paths or verify the working directory",
+          "Create the directory first with os.makedirs() if needed"
+        ],
+        "relatedDocs": ["https://docs.python.org/3/library/exceptions.html#FileNotFoundError"]
+      },
+      {
+        "id": "py-zero-division",
+        "regex": "ZeroDivisionError: (?:division by zero|integer division or modulo by zero|float division by zero)",
+        "explanation": "You attempted to divide a number by zero.",
+        "solutions": [
+          "Add a check for zero before dividing",
+          "Use a try/except block to handle the error",
+          "Provide a default value when the divisor is zero",
+          "Review the logic that produces the divisor"
+        ],
+        "relatedDocs": ["https://docs.python.org/3/library/exceptions.html#ZeroDivisionError"]
+      },
+      {
+        "id": "py-syntax-error",
+        "regex": "SyntaxError: (?:invalid syntax|EOL while scanning|unexpected EOF|invalid character)",
+        "explanation": "Python's parser found a syntax error in your code.",
+        "solutions": [
+          "Check for missing colons after if/for/while/def/class statements",
+          "Ensure parentheses, brackets, and braces are matched",
+          "Check for incorrect string quoting",
+          "Look for Python 2 vs Python 3 syntax differences"
+        ],
+        "relatedDocs": ["https://docs.python.org/3/library/exceptions.html#SyntaxError"]
+      },
+      {
+        "id": "py-recursion-error",
+        "regex": "RecursionError: maximum recursion depth exceeded",
+        "explanation": "Your code exceeded Python's maximum recursion depth (usually 1000 frames).",
+        "solutions": [
+          "Add a proper base case to your recursive function",
+          "Convert recursion to iteration using a loop and stack",
+          "Increase the limit with sys.setrecursionlimit() if truly needed",
+          "Check for accidental infinite recursion"
+        ],
+        "relatedDocs": ["https://docs.python.org/3/library/exceptions.html#RecursionError"]
+      },
+      {
+        "id": "py-stop-iteration",
+        "regex": "StopIteration",
+        "explanation": "An iterator or generator has been exhausted (no more items to yield).",
+        "solutions": [
+          "Use a for loop instead of manually calling next()",
+          "Use next(iterator, default) to provide a fallback value",
+          "Convert to a list first if you need to iterate multiple times",
+          "Check if the iterable is empty before consuming"
+        ],
+        "relatedDocs": ["https://docs.python.org/3/library/exceptions.html#StopIteration"]
+      },
+      {
+        "id": "py-permission-error",
+        "regex": "PermissionError: \\[Errno 13\\] Permission denied",
+        "explanation": "You don't have the necessary permissions to access the file or resource.",
+        "solutions": [
+          "Check file permissions with os.access()",
+          "Run the script with elevated privileges if appropriate",
+          "Ensure the file is not locked by another process",
+          "Use a different directory with write permissions"
+        ],
+        "relatedDocs": ["https://docs.python.org/3/library/exceptions.html#PermissionError"]
+      }
+    ]
+  }
+}

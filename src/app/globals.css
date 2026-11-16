@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  --color-obsidian: #0B0A0E;
+  --color-parchment: #16131D;
+  --color-crimson: #7A1C24;
+  --color-gold: #E6B86A;
+  --color-mist: #94A3B8;
+
+  --color-gothic-obsidian: #0B0A0E;
+  --color-gothic-parchment: #16131D;
+  --color-gothic-crimson: #7A1C24;
+  --color-gothic-gold: #E6B86A;
+  --color-gothic-mist: #94A3B8;
+
+  --font-cinzel: var(--font-cinzel), "Cinzel", "Playfair Display", serif;
+  --font-serif: var(--font-cinzel), "Cinzel", "Playfair Display", serif;
+  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", monospace;
+  --font-jetbrains-mono: var(--font-jetbrains-mono), "JetBrains Mono", monospace;
+
+  --shadow-gothic-glow: 0 0 15px rgba(230, 184, 106, 0.25);
+  --shadow-gothic-crimson: 0 0 15px rgba(122, 28, 36, 0.35);
+}
+
+:root {
+  --background: #0B0A0E;
+  --foreground: #E6B86A;
+  --obsidian: #0B0A0E;
+  --parchment: #16131D;
+  --crimson: #7A1C24;
+  --gold: #E6B86A;
+  --mist: #94A3B8;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-serif), Georgia, serif;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-cinzel), Georgia, serif;
+  letter-spacing: 0.05em;
+}
+
+code, pre, kbd, samp {
+  font-family: var(--font-jetbrains-mono), "JetBrains Mono", monospace;
+}
+
+::selection {
+  background-color: #7A1C24;
+  color: #E6B86A;
+}
+
+/* Custom gothic scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0B0A0E;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #16131D;
+  border: 1px solid rgba(230, 184, 106, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7A1C24;
+  border-color: #E6B86A;
+}
+
+/* Custom gothic utility classes */
+@layer utilities {
+  .gothic-card {
+    background-color: #16131D;
+    border: 1px solid rgba(230, 184, 106, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(11, 10, 14, 0.8);
+  }
+
+  .gothic-border {
+    border: 1px solid rgba(230, 184, 106, 0.25);
+  }
+
+  .gothic-border-crimson {
+    border: 1px solid rgba(122, 28, 36, 0.5);
+  }
+
+  .gothic-glow {
+    box-shadow: 0 0 15px rgba(230, 184, 106, 0.25);
+  }
+
+  .gothic-crimson-glow {
+    box-shadow: 0 0 15px rgba(122, 28, 36, 0.35);
+  }
+}
